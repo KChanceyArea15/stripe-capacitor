@@ -132,6 +132,7 @@ export interface StripeTerminalPlugin {
   collectPaymentMethod(options: { paymentIntent: string }): Promise<void>;
   cancelCollectPaymentMethod(): Promise<void>;
   confirmPaymentIntent(): Promise<void>;
+  processPayment(): Promise<{ status: string; id: string }>;
   installAvailableUpdate(): Promise<void>;
   cancelInstallUpdate(): Promise<void>;
   setReaderDisplay(options: Cart): Promise<void>;

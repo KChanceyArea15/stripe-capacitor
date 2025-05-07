@@ -774,6 +774,36 @@ class StripeTerminal(
             }
         }
 
+        fun processPayment(call: PluginCall) {
+            if (this.paymentIntentInstance == null) {
+                call.reject("No PaymentIntent available. Use collectPaymentMethod first.")
+                return
+            }
+
+            Terminal.getInstance().processPayment(paymentIntentInstance!!, object : PaymentIntentCallback {
+                override fun onSuccess(paymentIntent: PaymentIntent) {
+                    notifyListeners(TerminalEnumEvent.ProcessedPaymentIntent.webEventName, emptyObject)
+                    val result = JSObject()
+                    result.put("status", paymentIntent.status.toString())
+                    result.put("id", paymentIntent.id)
+                    call.resolve(result)
+                }
+
+                override fun onFailure(e: TerminalException) {
+                    notifyListeners(TerminalEnumEvent.Failed.webEventName, emptyObject)
+                    val errorObject = JSObject()
+                    errorObject.put("message", e.localizedMessage)
+                    if (e.apiError != null) {
+                        errorObject.put("code", e.apiError!!.code)
+                        errorObject.put("declineCode", e.apiError!!.declineCode)
+                    }
+                    call.reject(e.localizedMessage, null, errorObject)
+                }
+            })
+        }
+
+
+
     init {
         this.contextSupplier = contextSupplier
         this.discoveredReadersList = ArrayList()
