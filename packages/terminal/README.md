@@ -229,6 +229,7 @@ await StripeTerminal.setSimulatorConfiguration({ update: SimulateReaderUpdate.Up
 * [`collectPaymentMethod(...)`](#collectpaymentmethod)
 * [`cancelCollectPaymentMethod()`](#cancelcollectpaymentmethod)
 * [`confirmPaymentIntent()`](#confirmpaymentintent)
+* [`processPayment()`](#processpayment)
 * [`installAvailableUpdate()`](#installavailableupdate)
 * [`cancelInstallUpdate()`](#cancelinstallupdate)
 * [`setReaderDisplay(...)`](#setreaderdisplay)
@@ -392,6 +393,17 @@ cancelCollectPaymentMethod() => Promise<void>
 ```typescript
 confirmPaymentIntent() => Promise<void>
 ```
+
+--------------------
+
+
+### processPayment()
+
+```typescript
+processPayment() => Promise<{ status: string; id: string; }>
+```
+
+**Returns:** <code>Promise&lt;{ status: string; id: string; }&gt;</code>
 
 --------------------
 
@@ -935,17 +947,17 @@ addListener(eventName: TerminalEventsEnum.ReaderReconnectFailed, listenerFunc: (
 
 #### ReaderInterface
 
-<code>{ /** * The unique serial number is primary identifier inner plugin. */ serialNumber: string; label: string; batteryLevel: number; batteryStatus: <a href="#batterystatus">BatteryStatus</a>; simulated: boolean; id: number; availableUpdate: <a href="#readersoftwareupdateinterface">ReaderSoftwareUpdateInterface</a>; locationId: string; ipAddress: string; status: <a href="#networkstatus">NetworkStatus</a>; location: <a href="#locationinterface">LocationInterface</a>; locationStatus: <a href="#locationstatus">LocationStatus</a>; deviceType: <a href="#devicetype">DeviceType</a>; deviceSoftwareVersion: string | null; /** * iOS Only properties. These properties are not available on Android. */ isCharging: number; /** * Android Only properties. These properties are not available on iOS. */ baseUrl: string; bootloaderVersion: string; configVersion: string; emvKeyProfileId: string; firmwareVersion: string; hardwareVersion: string; macKeyProfileId: string; pinKeyProfileId: string; trackKeyProfileId: string; settingsVersion: string; pinKeysetId: string; }</code>
+<code>{ /** * The unique serial number is primary identifier inner plugin. */ serialNumber: string;  label: string; batteryLevel: number; batteryStatus: <a href="#batterystatus">BatteryStatus</a>; simulated: boolean; id: number; availableUpdate: <a href="#readersoftwareupdateinterface">ReaderSoftwareUpdateInterface</a>; locationId: string; ipAddress: string; status: <a href="#networkstatus">NetworkStatus</a>; location: <a href="#locationinterface">LocationInterface</a>; locationStatus: <a href="#locationstatus">LocationStatus</a>; deviceType: <a href="#devicetype">DeviceType</a>; deviceSoftwareVersion: string | null;  /** * iOS Only properties. These properties are not available on Android. */ isCharging: number;  /** * Android Only properties. These properties are not available on iOS. */ baseUrl: string; bootloaderVersion: string; configVersion: string; emvKeyProfileId: string; firmwareVersion: string; hardwareVersion: string; macKeyProfileId: string; pinKeyProfileId: string; trackKeyProfileId: string; settingsVersion: string; pinKeysetId: string; }</code>
 
 
 #### ReaderSoftwareUpdateInterface
 
-<code>{ deviceSoftwareVersion: string; estimatedUpdateTime: <a href="#updatetimeestimate">UpdateTimeEstimate</a>; requiredAt: number; }</code>
+<code>{ deviceSoftwareVersion: string; estimatedUpdateTime: <a href="#updatetimeestimate">UpdateTimeEstimate</a>; requiredAt: number; }</code>
 
 
 #### LocationInterface
 
-<code>{ id: string; displayName: string; address: { city: string; country: string; postalCode: string; line1: string; line2: string; state: string; }; ipAddress: string; }</code>
+<code>{ id: string; displayName: string; address: { city: string; country: string; postalCode: string; line1: string; line2: string; state: string; }; ipAddress: string; }</code>
 
 
 #### DeviceType
@@ -955,12 +967,12 @@ addListener(eventName: TerminalEventsEnum.ReaderReconnectFailed, listenerFunc: (
 
 #### Cart
 
-<code>{ currency: string; tax: number; total: number; lineItems: CartLineItem[]; }</code>
+<code>{ currency: string; tax: number; total: number; lineItems: CartLineItem[]; }</code>
 
 
 #### CartLineItem
 
-<code>{ displayName: string; quantity: number; amount: number; }</code>
+<code>{ displayName: string; quantity: number; amount: number; }</code>
 
 
 ### Enums

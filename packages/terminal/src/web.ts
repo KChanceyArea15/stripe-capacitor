@@ -213,6 +213,9 @@ export class StripeTerminalWeb extends WebPlugin implements StripeTerminalPlugin
   async cancelReaderReconnection(): Promise<void> {
     console.log('cancelReaderReconnection');
   }
+  async processPayment(): Promise<{ status: string; id: string }> {
+    throw this.unimplemented('processPayment');
+  }
 
   collect = 'deprecated';
   cancelCollect = 'deprecated';
