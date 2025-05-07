@@ -13,6 +13,7 @@
     "android/src/main/",
     "android/build.gradle",
     "dist/",
+    "dist/esm",
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
