@@ -117,7 +117,9 @@ export interface StripeTerminalPlugin {
     }): Promise<void>;
     cancelCollectPaymentMethod(): Promise<void>;
     confirmPaymentIntent(): Promise<void>;
-    processPayment(): Promise<{
+    processPayment(options: {
+        paymentIntentId: string;
+    }): Promise<{
         status: string;
         id: string;
     }>;

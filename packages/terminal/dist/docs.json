@@ -169,8 +169,14 @@
       },
       {
         "name": "processPayment",
-        "signature": "() => Promise<{ status: string; id: string; }>",
-        "parameters": [],
+        "signature": "(options: { paymentIntentId: string; }) => Promise<{ status: string; id: string; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ paymentIntentId: string; }"
+          }
+        ],
         "returns": "Promise<{ status: string; id: string; }>",
         "tags": [],
         "docs": "",

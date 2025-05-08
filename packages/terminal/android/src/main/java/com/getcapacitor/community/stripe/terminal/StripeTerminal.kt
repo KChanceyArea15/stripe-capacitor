@@ -774,34 +774,41 @@ class StripeTerminal(
             }
         }
 
+        @PluginMethod
         fun processPayment(call: PluginCall) {
-            if (this.paymentIntentInstance == null) {
-                call.reject("No PaymentIntent available. Use collectPaymentMethod first.")
+            val paymentIntentId = call.getString("paymentIntentId")
+            if (paymentIntentId == null) {
+                call.reject("Missing paymentIntentId")
                 return
             }
 
-            Terminal.getInstance().processPayment(paymentIntentInstance!!, object : PaymentIntentCallback {
+            Terminal.getInstance().retrievePaymentIntent(paymentIntentId, object : PaymentIntentCallback {
                 override fun onSuccess(paymentIntent: PaymentIntent) {
-                    notifyListeners(TerminalEnumEvent.ProcessedPaymentIntent.webEventName, emptyObject)
-                    val result = JSObject()
-                    result.put("status", paymentIntent.status.toString())
-                    result.put("id", paymentIntent.id)
-                    call.resolve(result)
+                    Terminal.getInstance().processPayment(paymentIntent, object : PaymentIntentCallback {
+                        override fun onSuccess(processedIntent: PaymentIntent) {
+                            val result = JSObject()
+                            result.put("status", processedIntent.status.toString())
+                            result.put("id", processedIntent.id)
+                            call.resolve(result)
+                        }
+
+                        override fun onFailure(e: TerminalException) {
+                            val errorObject = JSObject()
+                            errorObject.put("message", e.localizedMessage)
+                            if (e.apiError != null) {
+                                errorObject.put("code", e.apiError!!.code)
+                                errorObject.put("declineCode", e.apiError!!.declineCode)
+                            }
+                            call.reject(e.localizedMessage, null, errorObject)
+                        }
+                    })
                 }
 
                 override fun onFailure(e: TerminalException) {
-                    notifyListeners(TerminalEnumEvent.Failed.webEventName, emptyObject)
-                    val errorObject = JSObject()
-                    errorObject.put("message", e.localizedMessage)
-                    if (e.apiError != null) {
-                        errorObject.put("code", e.apiError!!.code)
-                        errorObject.put("declineCode", e.apiError!!.declineCode)
-                    }
-                    call.reject(e.localizedMessage, null, errorObject)
+                    call.reject("Failed to retrieve PaymentIntent: ${e.localizedMessage}")
                 }
             })
         }
-
 
 
     init {

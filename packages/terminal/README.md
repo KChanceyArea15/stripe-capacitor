@@ -229,7 +229,7 @@ await StripeTerminal.setSimulatorConfiguration({ update: SimulateReaderUpdate.Up
 * [`collectPaymentMethod(...)`](#collectpaymentmethod)
 * [`cancelCollectPaymentMethod()`](#cancelcollectpaymentmethod)
 * [`confirmPaymentIntent()`](#confirmpaymentintent)
-* [`processPayment()`](#processpayment)
+* [`processPayment(...)`](#processpayment)
 * [`installAvailableUpdate()`](#installavailableupdate)
 * [`cancelInstallUpdate()`](#cancelinstallupdate)
 * [`setReaderDisplay(...)`](#setreaderdisplay)
@@ -397,11 +397,15 @@ confirmPaymentIntent() => Promise<void>
 --------------------
 
 
-### processPayment()
+### processPayment(...)
 
 ```typescript
-processPayment() => Promise<{ status: string; id: string; }>
+processPayment(options: { paymentIntentId: string; }) => Promise<{ status: string; id: string; }>
 ```
+
+| Param         | Type                                      |
+| ------------- | ----------------------------------------- |
+| **`options`** | <code>{ paymentIntentId: string; }</code> |
 
 **Returns:** <code>Promise&lt;{ status: string; id: string; }&gt;</code>
 
