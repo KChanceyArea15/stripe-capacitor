@@ -788,6 +788,9 @@ class StripeTerminal(
                             val result = JSObject()
                             result.put("status", collectedIntent.status.toString())
                             result.put("id", collectedIntent.id)
+
+                            notifyListeners("terminalProcessedPayment", JSObject().put("id", collectedIntent.id))
+
                             call.resolve(result)
                         }
 
