@@ -774,7 +774,6 @@ class StripeTerminal(
             }
         }
 
-        @PluginMethod
         fun processPayment(call: PluginCall) {
             val paymentIntentId = call.getString("paymentIntentId")
             if (paymentIntentId == null) {
@@ -784,32 +783,25 @@ class StripeTerminal(
 
             Terminal.getInstance().retrievePaymentIntent(paymentIntentId, object : PaymentIntentCallback {
                 override fun onSuccess(paymentIntent: PaymentIntent) {
-                    Terminal.getInstance().processPayment(paymentIntent, object : PaymentIntentCallback {
-                        override fun onSuccess(processedIntent: PaymentIntent) {
+                    Terminal.getInstance().collectPaymentMethod(paymentIntent, object : PaymentIntentCallback {
+                        override fun onSuccess(collectedIntent: PaymentIntent) {
                             val result = JSObject()
-                            result.put("status", processedIntent.status.toString())
-                            result.put("id", processedIntent.id)
+                            result.put("status", collectedIntent.status.toString())
+                            result.put("id", collectedIntent.id)
                             call.resolve(result)
                         }
 
                         override fun onFailure(e: TerminalException) {
-                            val errorObject = JSObject()
-                            errorObject.put("message", e.localizedMessage)
-                            if (e.apiError != null) {
-                                errorObject.put("code", e.apiError!!.code)
-                                errorObject.put("declineCode", e.apiError!!.declineCode)
-                            }
-                            call.reject(e.localizedMessage, null, errorObject)
+                            call.reject("Collect failed: ${e.message}")
                         }
                     })
                 }
 
                 override fun onFailure(e: TerminalException) {
-                    call.reject("Failed to retrieve PaymentIntent: ${e.localizedMessage}")
+                    call.reject("Retrieve failed: ${e.message}")
                 }
             })
         }
-
 
     init {
         this.contextSupplier = contextSupplier
