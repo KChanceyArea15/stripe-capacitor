@@ -307,4 +307,7 @@ export interface StripeTerminalPlugin {
     addListener(eventName: TerminalEventsEnum.ReaderReconnectFailed, listenerFunc: ({ reader }: {
         reader: ReaderInterface;
     }) => void): Promise<PluginListenerHandle>;
+    addListener(eventName: TerminalEventsEnum.ProcessedPayment, listenerFunc: ({ id }: {
+        id: string;
+    }) => void): Promise<PluginListenerHandle>;
 }

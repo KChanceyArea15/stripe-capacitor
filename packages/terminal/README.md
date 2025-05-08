@@ -259,6 +259,7 @@ await StripeTerminal.setSimulatorConfiguration({ update: SimulateReaderUpdate.Up
 * [`addListener(TerminalEventsEnum.ReaderReconnectStarted, ...)`](#addlistenerterminaleventsenumreaderreconnectstarted-)
 * [`addListener(TerminalEventsEnum.ReaderReconnectSucceeded, ...)`](#addlistenerterminaleventsenumreaderreconnectsucceeded-)
 * [`addListener(TerminalEventsEnum.ReaderReconnectFailed, ...)`](#addlistenerterminaleventsenumreaderreconnectfailed-)
+* [`addListener(TerminalEventsEnum.ProcessedPayment, ...)`](#addlistenerterminaleventsenumprocessedpayment-)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 * [Enums](#enums)
@@ -936,6 +937,22 @@ addListener(eventName: TerminalEventsEnum.ReaderReconnectFailed, listenerFunc: (
 --------------------
 
 
+### addListener(TerminalEventsEnum.ProcessedPayment, ...)
+
+```typescript
+addListener(eventName: TerminalEventsEnum.ProcessedPayment, listenerFunc: ({ id }: { id: string; }) => void) => Promise<PluginListenerHandle>
+```
+
+| Param              | Type                                                                               |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| **`eventName`**    | <code><a href="#terminaleventsenum">TerminalEventsEnum.ProcessedPayment</a></code> |
+| **`listenerFunc`** | <code>({ id }: { id: string; }) =&gt; void</code>                                  |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -1128,6 +1145,7 @@ addListener(eventName: TerminalEventsEnum.ReaderReconnectFailed, listenerFunc: (
 | **`ReaderReconnectStarted`**       | <code>'terminalReaderReconnectStarted'</code>       |
 | **`ReaderReconnectSucceeded`**     | <code>'terminalReaderReconnectSucceeded'</code>     |
 | **`ReaderReconnectFailed`**        | <code>'terminalReaderReconnectFailed'</code>        |
+| **`ProcessedPayment`**             | <code>'terminalProcessedPayment'</code>             |
 
 
 #### DisconnectReason

@@ -23,6 +23,7 @@ export declare enum TerminalEventsEnum {
     PaymentStatusChange = "terminalPaymentStatusChange",
     ReaderReconnectStarted = "terminalReaderReconnectStarted",
     ReaderReconnectSucceeded = "terminalReaderReconnectSucceeded",
-    ReaderReconnectFailed = "terminalReaderReconnectFailed"
+    ReaderReconnectFailed = "terminalReaderReconnectFailed",
+    ProcessedPayment = "terminalProcessedPayment"
 }
 export declare type TerminalResultInterface = TerminalEventsEnum.ConfirmedPaymentIntent | TerminalEventsEnum.CollectedPaymentIntent | TerminalEventsEnum.Canceled | TerminalEventsEnum.Failed;

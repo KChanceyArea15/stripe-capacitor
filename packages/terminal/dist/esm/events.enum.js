@@ -25,5 +25,6 @@ export var TerminalEventsEnum;
     TerminalEventsEnum["ReaderReconnectStarted"] = "terminalReaderReconnectStarted";
     TerminalEventsEnum["ReaderReconnectSucceeded"] = "terminalReaderReconnectSucceeded";
     TerminalEventsEnum["ReaderReconnectFailed"] = "terminalReaderReconnectFailed";
+    TerminalEventsEnum["ProcessedPayment"] = "terminalProcessedPayment";
 })(TerminalEventsEnum || (TerminalEventsEnum = {}));
 //# sourceMappingURL=events.enum.js.map

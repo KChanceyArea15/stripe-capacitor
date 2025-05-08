@@ -28,6 +28,7 @@ var capacitorStripe = (function (exports, core, terminalJs) {
         TerminalEventsEnum["ReaderReconnectStarted"] = "terminalReaderReconnectStarted";
         TerminalEventsEnum["ReaderReconnectSucceeded"] = "terminalReaderReconnectSucceeded";
         TerminalEventsEnum["ReaderReconnectFailed"] = "terminalReaderReconnectFailed";
+        TerminalEventsEnum["ProcessedPayment"] = "terminalProcessedPayment";
     })(exports.TerminalEventsEnum || (exports.TerminalEventsEnum = {}));
 
     exports.TerminalConnectTypes = void 0;

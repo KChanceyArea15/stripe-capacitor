@@ -24,6 +24,7 @@ export enum TerminalEventsEnum {
   ReaderReconnectStarted = 'terminalReaderReconnectStarted',
   ReaderReconnectSucceeded = 'terminalReaderReconnectSucceeded',
   ReaderReconnectFailed = 'terminalReaderReconnectFailed',
+  ProcessedPayment = 'terminalProcessedPayment'
 }
 
 export type TerminalResultInterface =

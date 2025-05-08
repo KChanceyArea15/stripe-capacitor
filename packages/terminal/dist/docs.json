@@ -817,6 +817,30 @@
           "ReaderInterface"
         ],
         "slug": "addlistenerterminaleventsenumreaderreconnectfailed-"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: TerminalEventsEnum.ProcessedPayment, listenerFunc: ({ id }: { id: string; }) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "TerminalEventsEnum.ProcessedPayment"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "({ id }: { id: string; }) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "TerminalEventsEnum"
+        ],
+        "slug": "addlistenerterminaleventsenumprocessedpayment-"
       }
     ],
     "properties": []
@@ -1454,6 +1478,12 @@
         {
           "name": "ReaderReconnectFailed",
           "value": "'terminalReaderReconnectFailed'",
+          "tags": [],
+          "docs": ""
+        },
+        {
+          "name": "ProcessedPayment",
+          "value": "'terminalProcessedPayment'",
           "tags": [],
           "docs": ""
         }
