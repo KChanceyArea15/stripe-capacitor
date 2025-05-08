@@ -52,6 +52,11 @@ class StripeTerminalPlugin : Plugin() {
         implementation.setSimulatorConfiguration(call)
     }
 
+    @PluginMethod
+    fun processPayment(call: PluginCall) {
+        implementation.processPayment(call)
+    }
+
     @PermissionCallback
     @Throws(TerminalException::class)
     private fun locationPermsCallback(call: PluginCall) {
